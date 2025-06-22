@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "denoise-app"
+version = "0.1.0"
+description = "Современное приложение для шумоподавления изображений в частотной области"
+authors = ["mkass420"]
+readme = "README.md"
+packages = [{include = "denoise_app", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+pyqt5 = "^5.15.11"
+opencv-python = "^4.9.0.80"
+numpy = "^1.26.4"
+matplotlib = "^3.10.3"
+scipy = "^1.13.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+black = "^23.0.0"
+flake8 = "^6.0.0"
+mypy = "^1.5.0"
+
+[tool.poetry.scripts]
+denoise-app = "denoise_app.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
