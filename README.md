@@ -1,11 +1,13 @@
 
 # Shumodav
 
-##setup
+## setup
 clone repo and run 
 ```bash
 poetry install
+```
 
-##launch
+## launch
 ```bash
 poetry run python run.py
+```
