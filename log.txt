@@ -2,3 +2,541 @@ DEBUG: CUDA недоступна: Нет доступных CUDA устройс�
 DEBUG: OpenCL платформы найдены в системе
 DEBUG: OpenCL доступен для ускорения
 DEBUG: CUDA проверка не прошла: Нет доступных CUDA устройств
+DEBUG: load_image: загружаем изображение из /home/mkass420/code/TOZI/cqfoz7duvqj91.png
+DEBUG: load_image: изображение загружено, размер = (756, 640, 3)
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.006с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: schedule_fast_processing: запускаем быструю обработку
+DEBUG: schedule_fast_processing: D0=0.26, n=2, filter_type=Butterworth
+DEBUG: schedule_fast_processing: используем зашумленное изображение
+DEBUG: FastFilteringThread.run: начинаем быструю фильтрацию
+DEBUG: FastFilteringThread.run: размер входного изображения = (756, 640, 3)
+DEBUG: FastFilteringThread.run: тип данных = float32
+DEBUG: FastFilteringThread.run: диапазон = [0.000, 1.000]
+DEBUG: FastFilteringThread.run: фильтрация завершена
+DEBUG: FastFilteringThread.run: размер результата = (756, 640, 3)
+DEBUG: FastFilteringThread.run: диапазон результата = [0.000, 1.000]
+DEBUG: on_fast_processing_finished: получаем результат быстрой обработки
+DEBUG: on_fast_processing_finished: размер изображения = (756, 640, 3)
+DEBUG: on_fast_processing_finished: диапазон = [0.000, 1.000]
+DEBUG: on_fast_processing_finished: тип данных = float32
+DEBUG: on_fast_processing_finished: обновляем отображение
+DEBUG: on_fast_processing_finished: filtered_view существует = True
+DEBUG: on_fast_processing_finished: set_image вызван
+DEBUG: on_fast_processing_finished: быстрая обработка завершена успешно
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.006с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.006с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.004с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.004с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[0, 255]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.004с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.000, 1.000]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.026, 0.975]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[6, 248]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[6, 248]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.024, 0.973]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.024, 0.973]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.024, 0.973]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.031, 0.970]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[7, 247]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[7, 247]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.004с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.027, 0.969]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.027, 0.969]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.027, 0.969]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.036, 0.967]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[9, 246]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[9, 246]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.004с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.035, 0.965]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.035, 0.965]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.035, 0.965]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.051, 0.952]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[12, 242]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[12, 242]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.047, 0.949]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.047, 0.949]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.047, 0.949]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.051, 0.952]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[12, 242]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[12, 242]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.006с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.047, 0.949]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.047, 0.949]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.047, 0.949]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.036, 0.967]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[9, 246]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[9, 246]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.006с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.035, 0.965]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.035, 0.965]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.035, 0.965]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.043, 0.959]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[11, 244]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[11, 244]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.043, 0.957]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.043, 0.957]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.043, 0.957]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.058, 0.944]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[14, 240]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[14, 240]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.055, 0.941]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.055, 0.941]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.055, 0.941]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.064, 0.941]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[16, 239]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[15, 240]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.059, 0.941]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.059, 0.941]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.059, 0.941]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.047, 0.956]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[12, 243]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[12, 243]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.047, 0.953]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.047, 0.953]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.047, 0.953]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.064, 0.941]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[16, 239]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[15, 240]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.059, 0.941]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.059, 0.941]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.059, 0.941]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.064, 0.941]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[16, 239]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[15, 240]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.059, 0.941]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.059, 0.941]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.059, 0.941]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.065, 0.933]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[16, 238]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[15, 238]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.059, 0.933]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.059, 0.933]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.059, 0.933]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.086, 0.912]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[21, 232]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[20, 233]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.078, 0.914]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.078, 0.914]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.078, 0.914]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.039, 0.959]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[9, 244]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[9, 244]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.035, 0.957]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.035, 0.957]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.035, 0.957]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.033, 0.965]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[8, 246]
+DEBUG: DetailEnhancer.enhance_details: unsharp masking применен с blur_sigma=0.5, sharp_strength=0.05
+DEBUG: DetailEnhancer.enhance_details: диапазон после резкости=[8, 246]
+DEBUG: DetailEnhancer.enhance_details: CLAHE пропущен (contrast_strength=0)
+DEBUG: DetailEnhancer.enhance_details: время выполнения = 0.005с
+DEBUG: DetailEnhancer.enhance_details: конвертировано обратно в float32, диапазон=[0.031, 0.965]
+DEBUG: ImageProcessingThread.run: улучшение применено, диапазон=[0.031, 0.965]
+DEBUG: ImageProcessingThread.run: обработка завершена, отправляем результаты
+DEBUG: on_processing_finished_with_zoom: получаем результаты
+DEBUG: on_processing_finished_with_zoom: noisy_image диапазон=[0.000, 1.000]
+DEBUG: on_processing_finished_with_zoom: filtered_image диапазон=[0.031, 0.965]
+DEBUG: set_enhancement_parameters: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: set_enhancement_parameters: установлено sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: ImageProcessingThread.run: начинаем обработку
+DEBUG: ImageProcessingThread.run: enable_noise=True, enable_enhancement=True
+DEBUG: ImageProcessingThread.run: шум добавлен, диапазон=[0.000, 1.000]
+DEBUG: ImageProcessingThread.run: фильтр применен, диапазон=[0.031, 0.965]
+DEBUG: ImageProcessingThread.run: применяем улучшение деталей
+DEBUG: enhance_details: вызывается с sigma_s=0.1, sigma_r=0.05
+DEBUG: DetailEnhancer.enhance_details: sigma_s=0.1, sigma_r=0.05, contrast_strength=0.0
+DEBUG: DetailEnhancer.enhance_details: используем GPU
+DEBUG: DetailEnhancer.enhance_details: тип изображения=float32, форма=(756, 640, 3)
+DEBUG: DetailEnhancer.enhance_details: конвертировано в uint8, диапазон=[8, 245]
