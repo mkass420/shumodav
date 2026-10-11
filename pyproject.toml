@@ -29,6 +29,7 @@ pytest = ">=7.4"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = ["slow: тяжёлые проверки (прогон всех методов в GUI)"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
