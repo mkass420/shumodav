@@ -8,6 +8,7 @@ __pycache__/
 *.log
 data/
 weights/*.pth
+!weights/custom_cnn.pth
 results/cache/
 /*.png
 /*.jpg
