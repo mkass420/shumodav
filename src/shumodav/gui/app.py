@@ -7,12 +7,13 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication
 
 import shumodav.denoisers  # noqa: F401  (регистрация методов)
-from .main_window import MainWindow
+from .main_window import MainWindow, limit_malloc_arenas
 
 
 def main():
     # PyQt5 по умолчанию аварийно завершает процесс (abort) при любом необработанном исключении в слоте
     sys.excepthook = lambda t, v, tb: traceback.print_exception(t, v, tb)
+    limit_malloc_arenas()
     app = QApplication(sys.argv)
     win = MainWindow()
     win.show()

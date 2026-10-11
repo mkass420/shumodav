@@ -20,6 +20,29 @@ FAMILY_TITLES = {"spatial": "Пространственные", "frequency": "Ч
 DEBOUNCE_MS = 200
 
 
+# ---------- память ----------
+def _libc():
+    try:
+        import ctypes
+        return ctypes.CDLL("libc.so.6")
+    except OSError:  # не glibc (Windows, macOS): ничего не делаем
+        return None
+
+
+def limit_malloc_arenas(n: int = 2):
+    """Каждый новый поток по умолчанию получает свою арену malloc, и освобождённая в ней память
+    не возвращается системе — RSS растёт при каждом запросе. Вызывать до создания потоков."""
+    libc = _libc()
+    if libc is not None and hasattr(libc, "mallopt"):
+        libc.mallopt(-8, n)  # M_ARENA_MAX
+
+
+def trim_memory():
+    libc = _libc()
+    if libc is not None and hasattr(libc, "malloc_trim"):
+        libc.malloc_trim(0)
+
+
 # ---------- лучшие параметры из бенчмарка ----------
 def load_best() -> dict:
     try:
@@ -429,6 +452,7 @@ class MainWindow(QMainWindow):
     def _on_worker_finished(self):
         w, self._worker = self._worker, None
         w.deleteLater()
+        trim_memory()
         if self._dirty or self._compare_requested:
             self._dirty = False
             if not self._timer.isActive():
@@ -497,6 +521,7 @@ class MainWindow(QMainWindow):
     def _on_compare_finished(self):
         w, self._compare = self._compare, None
         w.deleteLater()
+        trim_memory()
         self.table.setSortingEnabled(True)
         self.btn_compare.setEnabled(True)
         self.statusBar().showMessage("Сравнение завершено")

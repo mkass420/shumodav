@@ -140,6 +140,10 @@ class SpectrumViewer(FigureCanvas):
         if image is None:
             return
         gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY) if image.ndim == 3 else image
+        m = max(gray.shape)
+        if m > 1024:  # для показа спектра большая картинка не нужна, а FFT 12 МП съедает сотни МБ
+            k = 1024 / m
+            gray = cv2.resize(gray, (int(gray.shape[1] * k), int(gray.shape[0] * k)), interpolation=cv2.INTER_AREA)
         mag = np.log(np.abs(np.fft.fftshift(np.fft.fft2(gray))) + 1e-9)
         self.ax.clear()
         self.ax.imshow(mag, cmap="viridis")
