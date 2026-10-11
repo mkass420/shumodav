@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 import numpy as np
-from PyQt5.QtCore import Qt, QThread, QTimer, pyqtSignal
+from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QFont, QStandardItem, QStandardItemModel
 from PyQt5.QtWidgets import (QAbstractItemView, QCheckBox, QComboBox, QFileDialog, QGridLayout, QGroupBox,
                              QHBoxLayout, QHeaderView, QLabel, QMainWindow, QPushButton, QScrollArea, QSpinBox,
@@ -10,37 +10,16 @@ from PyQt5.QtWidgets import (QAbstractItemView, QCheckBox, QComboBox, QFileDialo
 
 from ..bench.common import RESULTS
 from ..core.io import load_image, save_image, to_gray
-from ..core.pipeline import apply_noise, evaluate, run_denoiser
-from ..core.registry import get_denoiser, get_noise, list_denoisers, list_noises, resolve_params
+from ..core.registry import get_denoiser, get_noise, list_denoisers, list_noises
+from .compute import ComputeClient
 from .param_panel import ParamPanel
 from .widgets import SpectrumViewer, ZoomableImageView
 
 FAMILY_ORDER = ("spatial", "frequency", "wavelet", "neural")
 FAMILY_TITLES = {"spatial": "Пространственные", "frequency": "Частотные", "wavelet": "Вейвлеты", "neural": "Нейросети"}
 DEBOUNCE_MS = 200
-
-
-# ---------- память ----------
-def _libc():
-    try:
-        import ctypes
-        return ctypes.CDLL("libc.so.6")
-    except OSError:  # не glibc (Windows, macOS): ничего не делаем
-        return None
-
-
-def limit_malloc_arenas(n: int = 2):
-    """Каждый новый поток по умолчанию получает свою арену malloc, и освобождённая в ней память
-    не возвращается системе — RSS растёт при каждом запросе. Вызывать до создания потоков."""
-    libc = _libc()
-    if libc is not None and hasattr(libc, "mallopt"):
-        libc.mallopt(-8, n)  # M_ARENA_MAX
-
-
-def trim_memory():
-    libc = _libc()
-    if libc is not None and hasattr(libc, "malloc_trim"):
-        libc.malloc_trim(0)
+PREEMPT_S = 2.0  # новый запрос вытесняет текущий расчёт, только если тот идёт дольше
+POLL_MS = 30
 
 
 # ---------- лучшие параметры из бенчмарка ----------
@@ -62,66 +41,6 @@ def nearest_level(noise: str, params: dict) -> str:
 
 def best_for(noise: str, noise_params: dict, method: str):
     return load_best().get(noise, {}).get(nearest_level(noise, noise_params), {}).get(method)
-
-
-# ---------- потоки ----------
-def _make_noisy(req):
-    if req["no_noise"]:
-        return req["clean"]
-    return apply_noise(req["clean"], req["noise"], req["noise_params"], req["seed"])
-
-
-class ProcessWorker(QThread):
-    done = pyqtSignal(int, object)
-
-    def __init__(self, req_id, req, parent=None):
-        super().__init__(parent)
-        self.req_id, self.req = req_id, req
-
-    def run(self):
-        r, out = self.req, {"noisy": None, "result": None, "metrics": None, "seconds": None, "vis": None,
-                            "error": None}
-        try:
-            out["noisy"] = noisy = _make_noisy(r)
-            res, sec = run_denoiser(noisy, r["method"], r["method_params"])
-            out["result"], out["seconds"] = res, sec
-            if not r["no_noise"]:
-                out["metrics"] = evaluate(r["clean"], noisy, res)
-            d = get_denoiser(r["method"])
-            try:
-                out["vis"] = d.visualize(noisy, **resolve_params(d.params, r["method_params"]))
-            except Exception:
-                out["vis"] = None
-        except Exception as e:  # ошибка метода не должна ронять окно
-            out["error"] = f"{type(e).__name__}: {e}"
-        self.done.emit(self.req_id, out)
-
-
-class CompareWorker(QThread):
-    row = pyqtSignal(object)
-
-    def __init__(self, req, parent=None):
-        super().__init__(parent)
-        self.req = req
-
-    def run(self):
-        r = self.req
-        noisy = _make_noisy(r)
-        for d in list_denoisers():
-            if self.isInterruptionRequested():
-                return
-            params = r["best"](d.name) or {}
-            item = {"method": d.name, "family": d.family, "params": resolve_params(d.params, params),
-                    "psnr": None, "ssim": None, "seconds": None, "error": None}
-            try:
-                res, sec = run_denoiser(noisy, d.name, params)
-                item["seconds"] = sec
-                if not r["no_noise"]:
-                    ev = evaluate(r["clean"], noisy, res)
-                    item["psnr"], item["ssim"] = ev["psnr"], ev["ssim"]
-            except Exception as e:
-                item["error"] = f"{type(e).__name__}: {e}"
-            self.row.emit(item)
 
 
 class NumItem(QTableWidgetItem):
@@ -152,14 +71,20 @@ class MainWindow(QMainWindow):
         self.resize(1400, 850)
         self.original = None  # как загружено (RGB или gray)
         self.noisy = self.result = self.vis = None
-        self._worker = self._compare = None
+        self.client = ComputeClient()
+        self._kind = None  # что считается сейчас: "process" | "compare" | None
         self._latest_id = 0
+        self._compare_id = 0
+        self._image_key = 0
         self._dirty = False
         self._compare_requested = False
         self._viz_dirty = True
 
         self._timer = QTimer(self, singleShot=True, interval=DEBOUNCE_MS)
         self._timer.timeout.connect(self._kick)
+        self._poll_timer = QTimer(self, interval=POLL_MS)
+        self._poll_timer.timeout.connect(self._poll)
+        self._poll_timer.start()
 
         splitter = QSplitter(self)
         splitter.addWidget(self._build_left())
@@ -250,6 +175,10 @@ class MainWindow(QMainWindow):
         self.lbl_time = QLabel()
         for w in (self.lbl_noisy, self.lbl_result, self.lbl_time):
             gl.addWidget(w)
+        self.btn_cancel = QPushButton("Отмена расчёта")
+        self.btn_cancel.setEnabled(False)
+        self.btn_cancel.clicked.connect(self.cancel_job)
+        gl.addWidget(self.btn_cancel)
         lay.addWidget(g)
         self._show_metrics(None, None)
         lay.addStretch(1)
@@ -352,6 +281,7 @@ class MainWindow(QMainWindow):
 
     def _on_image_changed(self, *_):
         clean = self.clean_image()
+        self._image_key += 1  # в дочерний процесс уйдёт новая картинка
         if clean is not None:
             self.views[0].set_image(clean)
             self.noisy = self.result = None
@@ -402,21 +332,27 @@ class MainWindow(QMainWindow):
         self._latest_id += 1
         self._timer.start()
 
-    # --- очередь потоков: один активный воркер ---
+    # --- расчёты в дочернем процессе: одна задача за раз ---
     def is_busy(self):
-        return (self._worker is not None or self._compare is not None or self._timer.isActive()
-                or self._dirty or self._compare_requested)
+        return (self.client.busy() or self._timer.isActive() or self._dirty or self._compare_requested)
+
+    def has_running_workers(self) -> bool:
+        return self.client.busy()
 
     def _kick(self):
         if self.original is None or self._method_name() is None:
             return
-        if self._worker is not None or self._compare is not None:
-            self._dirty = True
+        if self.client.busy():
+            self._dirty = True  # запустится сразу после текущей задачи (или вытеснит её, если она затянулась)
             return
         if self._compare_requested:
             self._start_compare()
         else:
             self._start_process()
+
+    def prewarm(self):
+        """Заранее запустить дочерний процесс, чтобы первый расчёт не ждал импортов."""
+        self.client.start()
 
     def _snapshot(self):
         return {"clean": self.clean_image(), "no_noise": self.cb_nonoise.isChecked(),
@@ -426,14 +362,58 @@ class MainWindow(QMainWindow):
     def _start_process(self):
         req = self._snapshot()
         req.update(method=self._method_name(), method_params=self.panel_method.values())
-        self._worker = ProcessWorker(self._latest_id, req)
-        self._worker.done.connect(self._on_done)
-        self._worker.finished.connect(self._on_worker_finished)
         h, w = req["clean"].shape[:2]
+        self._kind = "process"
+        self.client.submit("process", self._latest_id, req, self._image_key)
         big = h * w > 1_500_000
         self.statusBar().showMessage(
             f"Обработка… (большое изображение {w}×{h}: медленные методы могут считаться минуты)" if big else "Обработка…")
-        self._worker.start()
+        self.btn_cancel.setEnabled(True)
+
+    def cancel_job(self, *_):
+        """Убить дочерний процесс: расчёт прерывается сразу; следующий запрос запустит новый процесс."""
+        was = self.client.busy()
+        kind = self._kind
+        self.client.kill()
+        self._kind = None
+        self._dirty = False
+        self._compare_requested = False
+        self.btn_cancel.setEnabled(False)
+        if kind == "compare":
+            self._finish_compare("Сравнение отменено")
+        elif was:
+            self.statusBar().showMessage("Расчёт отменён")
+
+    def _poll(self):
+        """Забрать ответы дочернего процесса; вытеснить затянувшийся расчёт новым запросом."""
+        for kind, job_id, payload in self.client.poll():
+            if kind == "result":
+                self._kind = None
+                self._on_done(job_id, payload)
+            elif kind == "row":
+                if job_id == self._compare_id:
+                    self._add_row(payload)
+            elif kind == "compare_done":
+                self._kind = None
+                self._finish_compare("Сравнение завершено")
+            elif kind == "crashed":
+                was = self._kind
+                self._kind = None
+                if was == "compare":
+                    self._finish_compare(f"Сравнение прервано: {payload}")
+                else:
+                    self.statusBar().showMessage(f"Ошибка: {payload}")
+        if not self.client.busy():
+            self.btn_cancel.setEnabled(False)
+            if (self._dirty or self._compare_requested) and not self._timer.isActive():
+                self._dirty = False
+                self._kick()
+        elif ((self._dirty or self._compare_requested) and self._kind == "process"
+              and self.client.elapsed() > PREEMPT_S and not self._timer.isActive()):
+            self.client.kill()  # текущий расчёт устарел и затянулся — не ждём его
+            self._kind = None
+            self._dirty = False
+            self._kick()
 
     def _on_done(self, req_id, out):
         if req_id != self._latest_id:
@@ -448,15 +428,6 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(f"Ошибка метода: {out['error']}" if out["error"] else "Готово")
         self._viz_dirty = True
         self._update_viz()
-
-    def _on_worker_finished(self):
-        w, self._worker = self._worker, None
-        w.deleteLater()
-        trim_memory()
-        if self._dirty or self._compare_requested:
-            self._dirty = False
-            if not self._timer.isActive():
-                self._kick()
 
     def _show_metrics(self, m, seconds):
         self.lbl_noisy.setText(f"Шумное: PSNR {fmt(m and m['psnr_noisy'])} дБ, SSIM {fmt(m and m['ssim_noisy'], 3)}")
@@ -492,15 +463,15 @@ class MainWindow(QMainWindow):
     def _start_compare(self):
         self._compare_requested = False
         req = self._snapshot()
-        req["best"] = lambda m: best_for(req["noise"], req["noise_params"], m)
+        req["best_params"] = {d.name: best_for(req["noise"], req["noise_params"], d.name) for d in list_denoisers()}
+        self._compare_id += 1
+        self._kind = "compare"
         self.table.setSortingEnabled(False)
         self.table.setRowCount(0)
         self.btn_compare.setEnabled(False)
-        self._compare = CompareWorker(req)
-        self._compare.row.connect(self._add_row)
-        self._compare.finished.connect(self._on_compare_finished)
+        self.btn_cancel.setEnabled(True)
         self.statusBar().showMessage("Сравнение методов…")
-        self._compare.start()
+        self.client.submit("compare", self._compare_id, req, self._image_key)
 
     def _add_row(self, it):
         t = self.table
@@ -518,17 +489,11 @@ class MainWindow(QMainWindow):
         t.setItem(r, 3, NumItem(it["ssim"], fmt(it["ssim"], 3)))
         t.setItem(r, 4, NumItem(it["seconds"], "ошибка" if it["error"] else fmt(it["seconds"], 4)))
 
-    def _on_compare_finished(self):
-        w, self._compare = self._compare, None
-        w.deleteLater()
-        trim_memory()
+    def _finish_compare(self, message):
         self.table.setSortingEnabled(True)
         self.btn_compare.setEnabled(True)
-        self.statusBar().showMessage("Сравнение завершено")
-        if self._dirty:
-            self._dirty = False
-            if not self._timer.isActive():
-                self._kick()
+        self.btn_cancel.setEnabled(False)
+        self.statusBar().showMessage(message)
 
     def select_from_table(self, row):
         item = self.table.item(row, 0)
@@ -538,12 +503,8 @@ class MainWindow(QMainWindow):
         self.panel_method.set_values(item.data(Qt.UserRole + 1))
 
     # --- закрытие ---
-    def has_running_workers(self) -> bool:
-        return self._worker is not None or self._compare is not None
-
     def closeEvent(self, event):
-        # не ждём воркеры: тяжёлый метод на большой картинке считается минутами и заморозил бы окно
         self._timer.stop()
-        if self._compare is not None:
-            self._compare.requestInterruption()
+        self._poll_timer.stop()
+        self.client.shutdown()  # убить дочерний процесс — ждать расчёт не нужно
         super().closeEvent(event)

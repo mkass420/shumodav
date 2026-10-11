@@ -21,6 +21,12 @@ from shumodav.gui.param_panel import ParamPanel  # noqa: E402
 app = QApplication.instance() or QApplication([])
 
 
+def real_methods():
+    """Методы пакета. Тестовые заглушки (identity, box_blur) зарегистрированы только в процессе pytest,
+    а расчёты GUI идут в дочернем процессе, где их нет."""
+    return [d for d in list_denoisers() if type(d).__module__.startswith("shumodav.denoisers")]
+
+
 def wait_until(cond, timeout=60.0):
     t0 = time.time()
     while time.time() - t0 < timeout:
@@ -114,8 +120,9 @@ def test_best_params_button_and_compare(win):
     settle(win)
     win.compare_all()
     settle(win, 120)
-    names = [get_denoiser(d.name).label for d in list_denoisers()]
+    names = [d.name for d in real_methods()]
     assert win.table.rowCount() == len(names)
+    assert not win.client.busy() and win.btn_compare.isEnabled()
     row = next(r for r in range(win.table.rowCount()) if win.table.item(r, 0).text() == get_denoiser("median").label)
     win.select_from_table(row)
     assert win._method_name() == "median"
@@ -125,7 +132,7 @@ def test_best_params_button_and_compare(win):
 @pytest.mark.parametrize("noise", ["gaussian", "salt_pepper", "periodic"])
 def test_every_method_runs(win, noise):
     win.set_noise(noise)
-    for d in list_denoisers():
+    for d in real_methods():
         win.set_method(d.name)
         settle(win)
         msg = win.statusBar().currentMessage()
@@ -133,18 +140,85 @@ def test_every_method_runs(win, noise):
         assert win.result is not None and win.result.shape == win.clean_image().shape
 
 
-def test_close_does_not_block_on_running_worker(image_path):
-    import time as _t
+def _big_image(tmp_path, n=700):
+    p = tmp_path / "big.png"
+    save_image(p, np.random.default_rng(0).random((n, n, 3)).astype(np.float32))
+    return str(p)
 
+
+def test_cancel_kills_heavy_job(tmp_path):
     w = MainWindow()
     w.show()
-    w.load_path(image_path)
+    w.load_path(_big_image(tmp_path))
     w.set_method("bm3d")
-    w._kick()  # сразу стартуем расчёт, без debounce
-    wait_until(lambda: w._worker is not None, 5)
-    t0 = _t.time()
+    w._kick()
+    assert wait_until(lambda: w.client.busy(), 5)
+    assert w.btn_cancel.isEnabled()
+    pid = w.client._proc.pid
+    t0 = time.time()
+    w.cancel_job()
+    assert time.time() - t0 < 3 and not w.client.busy()
+    assert w.statusBar().currentMessage() == "Расчёт отменён"
+    assert not os.path.exists(f"/proc/{pid}") or open(f"/proc/{pid}/stat").read().split()[2] == "Z"
+    # после отмены приложение продолжает работать: новый процесс считает быстрый метод
+    w.set_method("mean")
+    settle(w)
+    assert w.result is not None and w.statusBar().currentMessage() == "Готово"
     w.close()
-    assert _t.time() - t0 < 1.0  # close() не ждёт воркер
-    assert w.has_running_workers()
-    if w._worker is not None:
-        w._worker.wait()  # чтобы поток не жил дольше теста
+
+
+def test_long_job_is_preempted_by_new_request(tmp_path, monkeypatch):
+    import shumodav.gui.main_window as mwmod
+
+    monkeypatch.setattr(mwmod, "PREEMPT_S", 0.5)
+    w = MainWindow()
+    w.show()
+    w.load_path(_big_image(tmp_path))
+    w.set_method("bm3d")
+    w._kick()
+    assert wait_until(lambda: w.client.busy(), 5)
+    t0 = time.time()
+    w.set_method("mean")  # новый запрос, пока считается BM3D
+    settle(w, 60)
+    assert time.time() - t0 < 20  # BM3D на таком кадре заметно дольше: его вытеснили
+    assert w.statusBar().currentMessage() == "Готово"
+    from shumodav.core.pipeline import run_denoiser
+
+    ref, _ = run_denoiser(w.noisy, "mean", {"ksize": 3})
+    assert np.array_equal(w.result, ref)
+    w.close()
+
+
+def test_recovers_after_child_crash(win):
+    win.set_method("mean")
+    settle(win)
+    win.client._proc.kill()  # как будто OOM-killer
+    win.client._proc.join()
+    win.set_method("median")
+    settle(win)
+    assert win.statusBar().currentMessage() == "Готово"
+    assert win.result is not None
+
+
+def test_close_kills_child_without_waiting(tmp_path):
+    w = MainWindow()
+    w.show()
+    w.load_path(_big_image(tmp_path))
+    w.set_method("bm3d")
+    w._kick()
+    assert wait_until(lambda: w.client.busy(), 5)
+    t0 = time.time()
+    w.close()
+    assert time.time() - t0 < 3
+    assert not w.client.busy()
+
+
+def test_image_sent_once(win):
+    """Картинка пересылается в дочерний процесс один раз: второй запрос идёт без неё."""
+    win.set_method("mean")
+    settle(win)
+    key = win._image_key
+    assert win.client._child_key == key
+    win.panel_method.set_values({"ksize": 5})
+    settle(win)
+    assert win.client._child_key == key and win.statusBar().currentMessage() == "Готово"
