@@ -131,3 +131,20 @@ def test_every_method_runs(win, noise):
         msg = win.statusBar().currentMessage()
         assert msg == "Готово", f"{d.name}/{noise}: {msg}"
         assert win.result is not None and win.result.shape == win.clean_image().shape
+
+
+def test_close_does_not_block_on_running_worker(image_path):
+    import time as _t
+
+    w = MainWindow()
+    w.show()
+    w.load_path(image_path)
+    w.set_method("bm3d")
+    w._kick()  # сразу стартуем расчёт, без debounce
+    wait_until(lambda: w._worker is not None, 5)
+    t0 = _t.time()
+    w.close()
+    assert _t.time() - t0 < 1.0  # close() не ждёт воркер
+    assert w.has_running_workers()
+    if w._worker is not None:
+        w._worker.wait()  # чтобы поток не жил дольше теста

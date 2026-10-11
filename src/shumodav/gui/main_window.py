@@ -406,7 +406,10 @@ class MainWindow(QMainWindow):
         self._worker = ProcessWorker(self._latest_id, req)
         self._worker.done.connect(self._on_done)
         self._worker.finished.connect(self._on_worker_finished)
-        self.statusBar().showMessage("Обработка…")
+        h, w = req["clean"].shape[:2]
+        big = h * w > 1_500_000
+        self.statusBar().showMessage(
+            f"Обработка… (большое изображение {w}×{h}: медленные методы могут считаться минуты)" if big else "Обработка…")
         self._worker.start()
 
     def _on_done(self, req_id, out):
@@ -510,10 +513,12 @@ class MainWindow(QMainWindow):
         self.panel_method.set_values(item.data(Qt.UserRole + 1))
 
     # --- закрытие ---
+    def has_running_workers(self) -> bool:
+        return self._worker is not None or self._compare is not None
+
     def closeEvent(self, event):
+        # не ждём воркеры: тяжёлый метод на большой картинке считается минутами и заморозил бы окно
+        self._timer.stop()
         if self._compare is not None:
             self._compare.requestInterruption()
-            self._compare.wait()
-        if self._worker is not None:
-            self._worker.wait()
         super().closeEvent(event)
