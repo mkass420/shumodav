@@ -26,7 +26,7 @@ class Wavelet(Denoiser):
         ParamSpec("wavelet", "Вейвлет", "choice", "db4",
                   choices=("db1", "db2", "db4", "sym4", "coif1", "bior1.3"), grid=("db4", "sym4")),
         ParamSpec("level", "Уровней", "int", 2, 1, 4, 1, grid=(2, 3)),
-        ParamSpec("threshold", "Порог", "float", 0.1, 0.02, 0.3, 0.01, grid=(0.03, 0.05, 0.08, 0.12, 0.2)),
+        ParamSpec("threshold", "Порог", "float", 0.1, 0.02, 0.3, 0.01, grid=(0.03, 0.05, 0.08, 0.12, 0.2, 0.3)),
         ParamSpec("mode", "Режим порога", "choice", "soft", choices=("soft", "hard")),
         ParamSpec("swt", "Стационарное (SWT)", "bool", False, grid=(True,)),
         ParamSpec("threshold_rule", "Правило порога", "choice", "manual", choices=("manual", "bayes")),
