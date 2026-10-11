@@ -1,39 +1,35 @@
 [tool.poetry]
-name = "denoise-app"
-version = "0.1.0"
-description = "Современное приложение для шумоподавления изображений в частотной области"
+name = "shumodav"
+version = "2.0.0"
+description = "Сравнение методов шумоподавления изображений"
 authors = ["mkass420"]
 readme = "README.md"
-packages = [{include = "denoise_app", from = "src"}]
+packages = [{include = "shumodav", from = "src"}]
 
 [tool.poetry.dependencies]
-python = ">=3.12"
-pyqt5 = "^5.15.11"
-opencv-python = "^4.9.0.80"
-numpy = "^1.26.4"
-matplotlib = "^3.10.3"
-scipy = "^1.13.0"
-pywavelets = "^1.9.0"
+python = ">=3.11,<3.14"
+numpy = ">=1.26"
+scipy = ">=1.13"
+opencv-python = ">=4.9"
+pywavelets = ">=1.6"
+scikit-image = ">=0.22"
+matplotlib = ">=3.8"
+pandas = ">=2.1"
+tqdm = ">=4.66"
+pyqt5 = ">=5.15"
+torch = {version = ">=2.2", optional = true}
+bm3d = {version = ">=4.0", optional = true}
+
+[tool.poetry.extras]
+neural = ["torch"]
+bm3d = ["bm3d"]
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.0"
-black = "^23.0.0"
-flake8 = "^6.0.0"
-mypy = "^1.5.0"
+pytest = ">=7.4"
 
-[tool.poetry.scripts]
-denoise-app = "denoise_app.main:main"
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-line-length = 88
-target-version = ['py310']
-
-[tool.mypy]
-python_version = "3.10"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
