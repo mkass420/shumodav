@@ -27,7 +27,7 @@
 - [x] Блок 4 — бенчмарк: tune / run / report (quick-результаты в results/ не коммитим, итоговые — после полного прогона; план — docs/plans/04-block4-bench.md)
 - [x] Блок 5 — GUI (offscreen-проверка пройдена; ждёт ручной проверки пользователем; план — docs/plans/05-block5-gui.md)
 - [x] Блок 6 — интеграция обученной CNN, финальный прогон и отчёт (train_log.csv и train_curve.png лежат сразу в results/)
-- [ ] Блок 7 — документация: README, материалы для записки и презентации
+- [x] Блок 7 — документация: README, материалы для записки и презентации (docs/results.md, docs/report_draft.md, docs/slides.md; план — docs/plans/06-block7-docs.md)
 
 ---
 
