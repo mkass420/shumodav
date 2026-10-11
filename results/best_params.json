@@ -1,0 +1,657 @@
+{
+ "gaussian": {
+  "mid": {
+   "bm3d": {
+    "sigma": 25
+   },
+   "fft_lowpass": {
+    "kind": "gaussian",
+    "d0": 0.3,
+    "order": 2,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 1
+   },
+   "bilateral": {
+    "d": 5,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 20
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.12,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "low": {
+   "bm3d": {
+    "sigma": 15
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.5,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 0.5
+   },
+   "bilateral": {
+    "d": 5,
+    "sigma_color": 0.1,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 15
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.08,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "high": {
+   "bm3d": {
+    "sigma": 50
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.15,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 5
+   },
+   "median": {
+    "ksize": 7
+   },
+   "gaussian": {
+    "sigma": 1.5
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 3,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  }
+ },
+ "salt_pepper": {
+  "mid": {
+   "bm3d": {
+    "sigma": 50
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.2,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 5
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 1.5
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "db4",
+    "level": 3,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "low": {
+   "bm3d": {
+    "sigma": 35
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.2,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 1
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "db4",
+    "level": 2,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "high": {
+   "bm3d": {
+    "sigma": 50
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.15,
+    "order": 2,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 7
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 1.5
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "db4",
+    "level": 3,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  }
+ },
+ "speckle": {
+  "mid": {
+   "bm3d": {
+    "sigma": 25
+   },
+   "fft_lowpass": {
+    "kind": "gaussian",
+    "d0": 0.3,
+    "order": 2,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 1
+   },
+   "bilateral": {
+    "d": 5,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.12,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "low": {
+   "bm3d": {
+    "sigma": 15
+   },
+   "fft_lowpass": {
+    "kind": "gaussian",
+    "d0": 0.5,
+    "order": 2,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 0.5
+   },
+   "bilateral": {
+    "d": 5,
+    "sigma_color": 0.1,
+    "sigma_space": 3
+   },
+   "nlm": {
+    "h": 15
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.05,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "high": {
+   "bm3d": {
+    "sigma": 35
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.2,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 5
+   },
+   "gaussian": {
+    "sigma": 1
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  }
+ },
+ "poisson": {
+  "mid": {
+   "bm3d": {
+    "sigma": 35
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.3,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 1
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 3
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.2,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "low": {
+   "bm3d": {
+    "sigma": 15
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.5,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 0.5
+   },
+   "bilateral": {
+    "d": 5,
+    "sigma_color": 0.2,
+    "sigma_space": 3
+   },
+   "nlm": {
+    "h": 15
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 2,
+    "threshold": 0.08,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "high": {
+   "bm3d": {
+    "sigma": 50
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.15,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 5
+   },
+   "median": {
+    "ksize": 7
+   },
+   "gaussian": {
+    "sigma": 1.5
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 3,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  }
+ },
+ "periodic": {
+  "mid": {
+   "bm3d": {
+    "sigma": 10
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.1,
+    "order": 4,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 4,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 7
+   },
+   "median": {
+    "ksize": 7
+   },
+   "gaussian": {
+    "sigma": 3
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 3,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "low": {
+   "bm3d": {
+    "sigma": 50
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.2,
+    "order": 1,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 2,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 3
+   },
+   "median": {
+    "ksize": 3
+   },
+   "gaussian": {
+    "sigma": 0.5
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.1,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 20
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 3,
+    "threshold": 0.12,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  },
+  "high": {
+   "bm3d": {
+    "sigma": 10
+   },
+   "fft_lowpass": {
+    "kind": "butterworth",
+    "d0": 0.1,
+    "order": 4,
+    "padding": 0.1
+   },
+   "fft_notch": {
+    "threshold": 5,
+    "radius": 4,
+    "exclude_center": 0.05
+   },
+   "mean": {
+    "ksize": 7
+   },
+   "median": {
+    "ksize": 7
+   },
+   "gaussian": {
+    "sigma": 3
+   },
+   "bilateral": {
+    "d": 9,
+    "sigma_color": 0.2,
+    "sigma_space": 5
+   },
+   "nlm": {
+    "h": 30
+   },
+   "wavelet": {
+    "wavelet": "sym4",
+    "level": 3,
+    "threshold": 0.3,
+    "mode": "soft",
+    "swt": true,
+    "threshold_rule": "manual",
+    "chroma_strength": 0.5,
+    "post_smooth": false
+   }
+  }
+ }
+}
